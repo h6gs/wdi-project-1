@@ -3,12 +3,12 @@ const blocks = [];
 
 function makeBlocks() {
   // assign block values
-  const blockValues = ['red','yellow','green','blue','purple'];
+  const blockValues = ['red','orange','yellow','green','blue','purple'];
   return blockValues[Math.floor(Math.random() * blockValues.length)];
 }
 
 //loop to make game blocks
-for (let i = 0; i < 100; i++) {
+for (let i = 0; i < 225; i++) {
   let block = makeBlocks();
   blocks.push(block);
 
@@ -20,7 +20,7 @@ for (let i = 0; i < blocks.length; i++) {
   // div.innerHTML = blocks[i];
   // document.body.appendChild(div);
   // $('body').append('<div id="blocks' + '"class=blocky></div>');
-  $('<div>', { 'class': blocks[i] }).appendTo(document.body);
+  $('<div>', { 'class': blocks[i]}).appendTo('main');
   console.log(blocks[i]);
 }
 
