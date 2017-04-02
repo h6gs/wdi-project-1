@@ -16,19 +16,6 @@ for (let i = 0; i < 225; i++) {
 
 //add blocks to page
 for (let i = 0; i < blocks.length; i++) {
-  // let div = document.createElement('div');
-  // div.innerHTML = blocks[i];
-  // document.body.appendChild(div);
-  // $('body').append('<div id="blocks' + '"class=blocky></div>');
   $('<div>', { 'class': blocks[i]}).appendTo('main');
   console.log(blocks[i]);
 }
-
-
-
-// for (let i = 0; i < blocks.length; i++) {
-//   // Create block div
-//   let div = $('<div></div>');
-//   div.innerHTML = blocks[i];
-//   $('.inner').append(div);
-// }
