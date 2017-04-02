@@ -1,3 +1,16 @@
+div {
+  height: 50px;
+  width: 50px;
+  float: left;
+  border: 1px solid black;
+  text-align: center;
+  line-height: 50px;
+}
 body{
+  text-align: center;
+  width: 45%;
+}
+
+.red{
   background-color: red;
 }
