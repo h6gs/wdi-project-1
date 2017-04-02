@@ -17,5 +17,4 @@ for (let i = 0; i < 225; i++) {
 //add blocks to page
 for (let i = 0; i < blocks.length; i++) {
   $('<div>', { 'class': blocks[i]}).appendTo('main');
-  console.log(blocks[i]);
 }

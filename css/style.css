@@ -2,7 +2,6 @@ main{
 text-align: center;
 width: 450px;
 margin: 0 auto;
-border: 1px solid black;
 }
 
 div {
@@ -12,24 +11,37 @@ div {
   text-align: center;
   line-height: 50px;
   box-shadow: inset 0 -1px 1px rgba(0,0,0,0.7),
-  inset 0 1px 1px rgba(255,255,255,1);
+  inset 1px 1px 1px rgba(255,255,255,1);
+}
+footer{
+  clear:both;
+  text-align: center;
+  padding: 20px
+
 }
 
-.red{
+
+.button {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+}
+
+.red, button[name="red"]{
   background-color: #FF4136;
 }
-.orange{
+.orange, button[name="orange"]{
   background-color: #FF851B;
 }
-.yellow{
+.yellow, button[name="yellow"]{
   background-color: #FFDC00;
 }
-.green{
+.green, button[name="green"]{
   background-color: #2ECC40;
 }
-.blue{
+.blue, button[name="blue"]{
   background-color: #39CCCC;
 }
-.purple{
+.purple, button[name="purple"]{
   background-color: #B10DC9;
 }
