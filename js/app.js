@@ -9,12 +9,10 @@ function makeBlocks() {
 
 //loop to make game blocks
 for (let i = 0; i < 225; i++) {
-  let block = makeBlocks();
-  blocks.push(block);
-
+  blocks.push(makeBlocks());
 }
 
 //add blocks to page
 for (let i = 0; i < blocks.length; i++) {
-  $('<div>', { 'class': blocks[i]}).appendTo('main');
+  $('<div>', {id: [i], 'class': blocks[i]}).appendTo('main');
 }

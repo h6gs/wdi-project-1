@@ -1,3 +1,7 @@
+body{
+  background-color: grey
+}
+
 main{
   text-align: center;
   width: 450px;
@@ -55,7 +59,6 @@ input, button, submit {
   width: 25px;
   margin: 20px;
   background: none;
-
 }
 
 .button::before{
