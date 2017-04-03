@@ -1,5 +1,8 @@
 
 const blocks = [];
+const board = {};
+const keys = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O'];
+let initBlock = '';
 
 function makeBlocks() {
   // assign block values
@@ -11,28 +14,25 @@ function makeBlocks() {
 for (let i = 0; i < 225; i++) {
   blocks.push(makeBlocks());
 }
-
-//add blocks to page
-for (let i = 0; i < blocks.length; i++) {
-  $('<div>', {id: [i], 'class': blocks[i]}).appendTo('main');
-}
-
-//change color of key square (top left)
-$('[name="redButton"]').on('click', function() {
-  $('#0').attr('class','red');
-});
-
-//change color of next cells until next red.
-$('[name="redButton"]').on('click', function() {
-  if ($('#0').next().attr('red')) {
-    $('#0').nextUntil('.red').attr('class','red');
-  } else {
-    console.log('no');
+//loop to make defined grid for blocks
+for (let i=0 ; i < keys.length; i++) {
+  board[keys[i]] = [];
+  for (let j = 0; j < keys.length; j++) {
+    board[keys[i]][j] = makeBlocks();
+    $('<div>', {id: keys[i] + j , 'class': board[keys[i]][j]}).appendTo('main');
   }
+}
+console.log(board);
 
+// click event, change colour of #A0 based off button color
+$('.button').on('click', function(e) {
+  const thisColor = e.target.id;
+  console.log(thisColor);
+  $('#A0').attr('class',thisColor);
+  initBlock = thisColor;
 });
 
-// $('#0').next(),console.log(this);
+
 
 
 
@@ -44,3 +44,9 @@ $('[name="redButton"]').on('click', function() {
 // then evaluate if immediately adjacent blocks match the colour clicked
 // if yes, colour is added and the adjacent block(s) join to the winning array
 // repeat
+
+
+//add blocks to page
+// for (let i = 0; i < blocks.length; i++) {
+//   $('<div>', {id: [i], 'class': blocks[i]}).appendTo('main');
+// }

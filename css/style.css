@@ -28,27 +28,25 @@ input, button, submit {
   border:none;
 }
 
-.red, .button[name="redButton"]::before, [name="redButton"]::after {
+.red, #red::before, #red::after {
   background-color: #FF4136;
 }
-.orange, .button[name="orangeButton"]::before, [name="orangeButton"]::after {
+.orange, #orange::before, #orange::after {
   background-color: #FF851B;
 }
-.yellow, .button[name="yellowButton"]::before, [name="yellowButton"]::after {
+.yellow, #yellow::before, #yellow::after {
   background-color: #FFDC00;
 }
-.green, .button[name="greenButton"]::before, [name="greenButton"]::after {
+.green, #green::before, #green::after {
   background-color: #2ECC40;
 }
-.blue, .button[name="blueButton"]::before, [name="blueButton"]::after {
+.blue, #blue::before, #blue::after {
   background-color: #39CCCC;
 }
-.purple {
+.purple, #purple::before, #purple::after {
   background-color: #B10DC9;
 }
-.button[name="purpleButton"]::before, [name="purpleButton"]::after{
-  background-color: #B10DC9;
-}
+
 .button{
   -webkit-transition: all 0.5s;
   -moz-transition: all 0.5s;
