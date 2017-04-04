@@ -1,11 +1,19 @@
-div:nth-child(1) {
-    border: 4px dashed black;
+.gameInstructions{
+  margin-left: 50px;
+  line-height: 50px;
+  display: inline-block;
+}
+h1{
+  text-align: center;
+}
+h2{
+  text-decoration: underline;
 }
 
 body{
-  background-color: grey;
   font-family: 'Press Start 2P', cursive;
-  text-align: center;
+  color: white;
+  background-color: black;
 }
 
 main{
@@ -13,16 +21,19 @@ main{
   margin: 0 auto;
 }
 
-div {
+div[name="allTheBlocks"]{
   height: 30px;
   width: 30px;
   float: left;
-  text-align: center;
   line-height: 50px;
-  box-shadow: inset 0 -1px 1px rgba(0,0,0,0.7),
-  inset 1px 1px 1px rgba(255,255,255,1);
+  box-shadow: inset 0 -4px 2px 0.5px rgba(0,0,0,0.7),
+  inset 2.5px 1px 1px rgba(255,255,255,1);
   box-sizing: border-box;
   border: 1px solid black;
+}
+
+div:nth-child(1) {
+    border: 4px dashed white;
 }
 
 footer{
@@ -79,8 +90,8 @@ input, button, submit {
   -moz-transition: all 0.5s;
   -o-transition: all 0.5s;
   transition: all 0.5s;
-  outline: 4px solid white;
-  outline-offset: -6px;
+  outline: 4px solid black ;
+  outline-offset: -7px;
 }
 
 .buttonColor::after{
@@ -95,8 +106,8 @@ input, button, submit {
   -moz-transition: all 0.5s;
   -o-transition: all 0.5s;
   transition: all 0.5s;
-  outline: 4px solid white;
-  outline-offset: -6.5px;
+  outline: 4px solid black;
+  outline-offset: -7px;
 }
 .buttonColor:hover::before{
   -webkit-transform: rotate(-225deg);
@@ -107,6 +118,7 @@ input, button, submit {
   height: 25px;
   width: 60px;
   margin: 0 0 0 -14px;
+  outline: 4px solid white;
 }
 
 .buttonColor:hover::after{
@@ -118,11 +130,16 @@ input, button, submit {
   height: 25px;
   width: 60px;
   margin: 0 0 0 -14px;
+  outline: 4px solid white;
 }
 
-.gameOptionButtons{
-  display: inline-block;
-  height: 50px;
-  width: 150px;
-  margin: 20px;
+.punct
+{
+background-color:blue;
+position:absolute;
+width:2px;
+height:6px;
 }
+
+#content {
+    height: 400px; width: 500px; border: solid 1px black;}

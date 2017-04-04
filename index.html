@@ -2,22 +2,32 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Pixel Dash</title>
+  <title>Block-Mania</title>
   <link rel="icon" type="image/png" href="images/bfav.png">
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+  <script type="js/effects.js"></script>
+  <script src="js/app.js" charset="utf-8"></script>
 </head>
 <body>
-  <h1>Pixel Dash</h1>
-  <main>
-  </main>
-  <aside class="gameOptionButtons">
+  <header>
+  <h1>Block-Mania</h1>
+  <div class="gameOptionButtons">
     <button class="buttonReset" id="reset">Reset</button>
     <button id="test">Test</button>
-  </aside>
+  </div>
+  </header>
+  <main>
+  </main>
+  <div class="gameInstructions">
+    <h2>INSTRUCTIONS</h2>
+    <p>&#9635; Begin At Top-Left Block</p>
+    <p>&#9635; Select Color Of </br> Adjacent Blocks</p>
+    <p>&#9635; Fill The Screen Until </br> One Color</p>
+  </div>
   <footer>
     <button class="buttonColor" id="red"></button>
     <button class="buttonColor" id="orange"></button>
@@ -26,6 +36,5 @@
     <button class="buttonColor" id="blue"></button>
     <button class="buttonColor" id="purple"></button>
   </footer>
-  <script src="js/app.js" charset="utf-8"></script>
 </body>
 </html>
