@@ -1,6 +1,8 @@
-
-const blocks = [];
-let   colorNow  = [];
+const $blocks     = [];
+let   newColor;
+let   originalColorOfFirstTile;
+let   $firstBlock;
+const width       = 15;
 
 function makeBlocks() {
   // assign block values
@@ -8,27 +10,82 @@ function makeBlocks() {
   return blockValues[Math.floor(Math.random() * blockValues.length)];
 }
 
-//loop to make game blocks
+// add blocks to page
 for (let i = 0; i < 225; i++) {
-  blocks.push(makeBlocks());
+  const block = $('<div>', { id: [i], 'class': makeBlocks() });
+  $blocks.push(block);
+  $('main').append(block);
+  $firstBlock = $blocks[0];
 }
 
-//add blocks to page
-for (let i = 0; i < blocks.length; i++) {
-  $('<div>', {id: [i], 'class': blocks[i]}).appendTo('main');
+// change first block
+$('.button').on('click', changeBlocks);
+
+function changeBlocks(e) {
+  newColor                 = e.target.id;
+  originalColorOfFirstTile = $firstBlock.attr('class');
+  recursiveBlockCheck(0);
 }
 
-$('.button').on('click', function(e) {
-  colorNow = e.target.id;
-  console.log(colorNow);
-  $('#0').attr('class', colorNow);
-});
+function recursiveBlockCheck(index) {
+  // console.log('CHECKING NEW INDEX', index);
 
+  // Select the block in the dom
+  const $newBlock    = $blocks[index];
+  // Get it's current Color
+  const currentColor = $newBlock.attr('class');
 
+  // Temp change the border-color to see recursion in action...
+  // $newBlock.css('border-color', 'black');
+  // setTimeout(() => {
+  //   $newBlock.css('border-color', 'white');
+  // }, 250);
 
+  // If it's not the same color as the first block,
+  // Stop recursion and exit with return
+  // console.log(originalColorOfFirstTile, currentColor);
+  if (originalColorOfFirstTile !== currentColor) return;
 
-// create object with N E S W, N - width
+  // Change the block to be the new color
+  $newBlock.attr('class', newColor);
+
+  const directions  = [-width,1,width,-1];
+  // Loop through the directions
+  for (let i = 0; i < directions.length; i++) {
+    // Use the directions to select a new block using the compass
+    const newIndex  = index + directions[i];
+    // Check that it's a valid move
+    if (
+      // e.g. above the top
+      (newIndex < 0) ||
+      // e.g. below the bottom
+      (newIndex > (width * width)) ||
+      // (1 % 15) - (0 % 15) -> VALID
+      // (14 % 15) - (15 % 15) -> NOT VALID
+      // e.g. checking end of row to the right
+      // e.g. end of row to the left
+      (newIndex % width - index % width) === 14
+    ) continue;
+
+    // console.log('checking', newIndex)
+    //
+    // // Use that block as the new starting block
+    recursiveBlockCheck(newIndex);
+  }
+}
+
+// const isValidMove = Boolean(); //boolean?
 //
-// const directions = [-15,+1,+15,-1]
+// const isMatching  = [];
 //
-// // Have the same color as
+//
+//
+// for blocks[i]=0; blocks.length, increment
+//     get block position in array
+//     check if there are any adjacement elements within legalMoves against directions (-15,+1,+15,-1)
+//     if valid move get adjacement elements class and compare,
+//     move into isMatching if they do
+//   for elements in isMatching
+//       change the class to blocks[0] color and loop over to next cell
+//       loop until no more matches on that row? and break line?
+//       re-initate on button click
