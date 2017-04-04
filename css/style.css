@@ -40,19 +40,19 @@ input, button, submit {
   background-color: #FF4136;
 }
 .orange, #orange::before, #orange::after {
-  background-color: #FF851B;
+  background-color: #f78909;
 }
 .yellow, #yellow::before, #yellow::after {
-  background-color: #FFDC00;
+  background-color: #FFF300;
 }
 .green, #green::before, #green::after {
-  background-color: #2ECC40;
+  background-color: #22B400;
 }
 .blue, #blue::before, #blue::after {
-  background-color: #39CCCC;
+  background-color: #008AFF;
 }
 .purple, #purple::before, #purple::after {
-  background-color: #B10DC9;
+  background-color: #FF00E6;
 }
 
 .buttonColor{

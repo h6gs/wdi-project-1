@@ -1,38 +1,39 @@
 const $blocks     = [];
-let   newColor;
-let   originalColorOfFirstTile;
-let   $firstBlock;
 const width       = 15;
+let   newColor;
+let   $firstBlock;
+let   originalColorOfFirstTile;
 
 addBlocks();
 
-$('#reset').on('click', addBlocks);
-// $('#test').on('click', autoClick);
+$('#reset').on('click', resetBlocks);
 $('.buttonColor').on('click', changeBlocks);
+$('#test').on('click', autoClick);
 
-// function autoClick() {
-//   const $buttons = $($('.buttonColor').sort(function() {
-//     return .5 - Math.random();
-//   }));
-//
-//   $.each($buttons, function() {
-//     setTimeout(() => {
-//       $(this).trigger('click', changeBlocks);
-//     }, 500);
-//   });
-//   setTimeout(() => {
-//     if ($('div').size() !== $(`div.${$('div').attr('class')}`).size()) {
-//       autoClick();
-//     }
-//   }, 500*$buttons.size());
-// }
+// Magic computer
+function autoClick() {
+  const $buttons = $($('.buttonColor').sort(function() {
+    return 0.9 - Math.random();
+  }));
+
+  $.each($buttons, function() {
+    setTimeout(() => {
+      $(this).trigger('click', changeBlocks);
+    }, 500);
+  });
+
+  setTimeout(() => {
+    if ($('div').size() !== $(`div.${$('div').attr('class')}`).size()) {
+      autoClick();
+    }
+  }, 500*$buttons.size());
+}
 
 function makeBlocks() {
   // assign block values
   const blockValues = ['red','orange','yellow','green','blue','purple'];
   return blockValues[Math.floor(Math.random() * blockValues.length)];
 }
-
 // add blocks to page
 function addBlocks(){
   for (let i = 0; i < 225; i++) {
@@ -42,6 +43,11 @@ function addBlocks(){
     $firstBlock = $blocks[0];
   }
 }
+function resetBlocks(){
+  $('div').remove();
+  addBlocks();
+}
+
 
 function changeBlocks(e) {
   newColor                 = e.target.id;
