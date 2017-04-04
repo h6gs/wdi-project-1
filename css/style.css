@@ -1,10 +1,14 @@
+/*div:nth-child(15n+15) {
+    background: black;
+}*/
+
 body{
   background-color: grey;
   font-family: 'Press Start 2P', cursive;
+  text-align: center;
 }
 
 main{
-  text-align: center;
   width: 450px;
   margin: 0 auto;
 }
@@ -17,9 +21,8 @@ div {
   line-height: 50px;
   box-shadow: inset 0 -1px 1px rgba(0,0,0,0.7),
   inset 1px 1px 1px rgba(255,255,255,1);
-
-  /*box-sizing: border-box;
-  border: 1px solid white;*/
+  box-sizing: border-box;
+  border: 1px solid white;
 }
 
 footer{
@@ -52,7 +55,7 @@ input, button, submit {
   background-color: #B10DC9;
 }
 
-.button{
+.buttonColor{
   -webkit-transition: all 0.5s;
   -moz-transition: all 0.5s;
   -o-transition: all 0.5s;
@@ -64,7 +67,7 @@ input, button, submit {
   background: none;
 }
 
-.button::before{
+.buttonColor::before{
   content: '';
   position: absolute;
   top: 0;
@@ -80,7 +83,7 @@ input, button, submit {
   outline-offset: -6px;
 }
 
-.button::after{
+.buttonColor::after{
   content: '';
   position: absolute;
   top: 0;
@@ -95,7 +98,7 @@ input, button, submit {
   outline: 4px solid white;
   outline-offset: -6.5px;
 }
-.button:hover::before{
+.buttonColor:hover::before{
   -webkit-transform: rotate(-225deg);
   -moz-transform: rotate(-225deg);
   -ms-transform: rotate(-225deg);
@@ -106,7 +109,7 @@ input, button, submit {
   margin: 0 0 0 -14px;
 }
 
-.button:hover::after{
+.buttonColor:hover::after{
   -webkit-transform: rotate(225deg);
   -moz-transform: rotate(225deg);
   -ms-transform: rotate(225deg);
@@ -115,4 +118,11 @@ input, button, submit {
   height: 25px;
   width: 60px;
   margin: 0 0 0 -14px;
+}
+
+.gameOptionButtons{
+  display: inline-block;
+  height: 50px;
+  width: 150px;
+  margin: 20px;
 }

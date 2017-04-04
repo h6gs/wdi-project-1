@@ -4,6 +4,29 @@ let   originalColorOfFirstTile;
 let   $firstBlock;
 const width       = 15;
 
+addBlocks();
+
+$('#reset').on('click', addBlocks);
+// $('#test').on('click', autoClick);
+$('.buttonColor').on('click', changeBlocks);
+
+// function autoClick() {
+//   const $buttons = $($('.buttonColor').sort(function() {
+//     return .5 - Math.random();
+//   }));
+//
+//   $.each($buttons, function() {
+//     setTimeout(() => {
+//       $(this).trigger('click', changeBlocks);
+//     }, 500);
+//   });
+//   setTimeout(() => {
+//     if ($('div').size() !== $(`div.${$('div').attr('class')}`).size()) {
+//       autoClick();
+//     }
+//   }, 500*$buttons.size());
+// }
+
 function makeBlocks() {
   // assign block values
   const blockValues = ['red','orange','yellow','green','blue','purple'];
@@ -11,15 +34,14 @@ function makeBlocks() {
 }
 
 // add blocks to page
-for (let i = 0; i < 225; i++) {
-  const block = $('<div>', { id: [i], 'class': makeBlocks() });
-  $blocks.push(block);
-  $('main').append(block);
-  $firstBlock = $blocks[0];
+function addBlocks(){
+  for (let i = 0; i < 225; i++) {
+    const block = $('<div>', { id: [i], 'class': makeBlocks() });
+    $blocks.push(block);
+    $('main').append(block);
+    $firstBlock = $blocks[0];
+  }
 }
-
-// change first block
-$('.button').on('click', changeBlocks);
 
 function changeBlocks(e) {
   newColor                 = e.target.id;
@@ -27,20 +49,19 @@ function changeBlocks(e) {
   recursiveBlockCheck(0);
 }
 
-function recursiveBlockCheck(index) {
-  console.log('CHECKING NEW INDEX', index);
 
+function recursiveBlockCheck(index) {
+  // console.log('CHECKING NEW INDEX', index);
   // Select the block in the dom
   const $newBlock    = $blocks[index];
   // Get it's current Color
   const currentColor = $newBlock.attr('class');
 
   // Temp change the border-color to see recursion in action...
-  // $newBlock.css('border-color', 'black');
-  // setTimeout(() => {
-  //   $newBlock.css('border-color', 'white');
-  // }, 250);
-
+  $newBlock.css('border-color', 'black');
+  setTimeout(() => {
+    $newBlock.css('border-color', 'white');
+  }, 250);
   // If it's not the same color as the first block,
   // Stop recursion and exit with return
   // console.log(originalColorOfFirstTile, currentColor);
@@ -55,17 +76,16 @@ function recursiveBlockCheck(index) {
     // Use the directions to select a new block using the compass
     const newIndex  = index + directions[i];
     // Check that it's a valid move
-    if (invalidMove(newIndex)) continue;
-
+    if (invalidMove(newIndex, index)) continue;
     // console.log('checking', newIndex)
-    //
+
     // // Use that block as the new starting block
     recursiveBlockCheck(newIndex);
   }
 }
 
-function invalidMove(index) {
-  return aboveTop(index) || belowBottom(index) || pastEnds(index);
+function invalidMove(newIndex, currentIndex) {
+  return aboveTop(newIndex) || belowBottom(newIndex) || pastSides(newIndex, currentIndex);
 }
 
 function aboveTop(index) {
@@ -73,12 +93,14 @@ function aboveTop(index) {
 }
 
 function belowBottom(index) {
-  return index > (width * width);
+  return index > (width * width)-1;
 }
 
-function pastEnds(index) {
-  return index % width - index % width === width;
+function pastSides(newIndex, currentIndex) {
+  return (newIndex % width) - (currentIndex % width) === 14;
 }
+
+
 
 /*
 was in line 59 between invalidMove(newIndex)
