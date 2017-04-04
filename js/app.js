@@ -28,7 +28,7 @@ function changeBlocks(e) {
 }
 
 function recursiveBlockCheck(index) {
-  // console.log('CHECKING NEW INDEX', index);
+  console.log('CHECKING NEW INDEX', index);
 
   // Select the block in the dom
   const $newBlock    = $blocks[index];
@@ -55,17 +55,7 @@ function recursiveBlockCheck(index) {
     // Use the directions to select a new block using the compass
     const newIndex  = index + directions[i];
     // Check that it's a valid move
-    if (
-      // e.g. above the top
-      (newIndex < 0) ||
-      // e.g. below the bottom
-      (newIndex > (width * width)) ||
-      // (1 % 15) - (0 % 15) -> VALID
-      // (14 % 15) - (15 % 15) -> NOT VALID
-      // e.g. checking end of row to the right
-      // e.g. end of row to the left
-      (newIndex % width - index % width) === 14
-    ) continue;
+    if (invalidMove(newIndex)) continue;
 
     // console.log('checking', newIndex)
     //
@@ -74,18 +64,31 @@ function recursiveBlockCheck(index) {
   }
 }
 
-// const isValidMove = Boolean(); //boolean?
-//
-// const isMatching  = [];
-//
-//
-//
-// for blocks[i]=0; blocks.length, increment
-//     get block position in array
-//     check if there are any adjacement elements within legalMoves against directions (-15,+1,+15,-1)
-//     if valid move get adjacement elements class and compare,
-//     move into isMatching if they do
-//   for elements in isMatching
-//       change the class to blocks[0] color and loop over to next cell
-//       loop until no more matches on that row? and break line?
-//       re-initate on button click
+function invalidMove(index) {
+  return aboveTop(index) || belowBottom(index) || pastEnds(index);
+}
+
+function aboveTop(index) {
+  return index < 0;
+}
+
+function belowBottom(index) {
+  return index > (width * width);
+}
+
+function pastEnds(index) {
+  return index % width - index % width === width;
+}
+
+/*
+was in line 59 between invalidMove(newIndex)
+// // e.g. above the top
+// (newIndex < 0) ||
+// // e.g. below the bottom
+// (newIndex > (width * width)) ||
+// // (1 % 15) - (0 % 15) -> VALID
+// // (14 % 15) - (15 % 15) -> NOT VALID
+// // e.g. checking end of row to the right
+// // e.g. end of row to the left
+// (newIndex % width - index % width) === 14
+*/
