@@ -21,7 +21,7 @@ $(function gameSetup() {
     for (let i = 0; i < 225; i++) {
       const block = $('<div>', { id: [i], 'class': makeBlocks(), name: 'allTheBlocks'});
       $blocks.push(block);
-      $('main').append(block);
+      $('.gameContainer').append(block);
       $firstBlock = $blocks[0];
     }
   }
@@ -45,15 +45,16 @@ $(function gameSetup() {
 
     $.each($buttons, function() {
       setTimeout(() => {
-        $(this).trigger('click', changeBlocks);
+        $(this).trigger('click', changeBlocks[10]);
       }, 500);
     });
 
-    setTimeout(() => {
-      if ($('div').size() !== $(`div.${$('div').attr('class')}`).size()) {
-        autoClick();
-      }
-    }, 500*$buttons.size());
+    //interval for autoClick
+    // setTimeout(() => {
+    //   if ($('div').size() !== $(`div.${$('div').attr('class')}`).size()) {
+    //     autoClick();
+    //   }
+    // }, 500*$buttons.size());
   }
 
   function recursiveBlockCheck(index) {
@@ -86,31 +87,27 @@ $(function gameSetup() {
   function invalidMove(newIndex, currentIndex) {
     return aboveTop(newIndex) || belowBottom(newIndex) || pastSides(newIndex, currentIndex);
   }
-
-  function aboveTop(index) {return index < 0;}
-
+  function aboveTop(index) {
+    return index < 0;
+  }
   function belowBottom(index) {
     return index > (width * width)-1;
   }
-
   function pastSides(newIndex, currentIndex) {
     return (newIndex % width) - (currentIndex % width) === 14;
   }
-
   function initAudio(){
     const audio = $('<audio>', {src: './music/Blox.mp3' });
-    $('.music').on('click', function() {
+    $('.music').text('Music').on('click', function() {
+      audio[0].paused ? $('.music').text('Pause') : $('.music').text('Music');
       audio[0].paused ? audio[0].play() : audio[0].pause();
     });
   }
-
   function blockSound(){
     const audio = $('<audio>', {src: './music/move.mp3' });
-    console.log(audio);
     $('.buttonColor').on('click', function() {
       audio[0].play();
     });
   }
-
 
 });

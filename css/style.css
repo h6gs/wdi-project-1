@@ -10,7 +10,8 @@
 .gameInstructions{
   margin-left: 50px;
   line-height: 50px;
-  display: inline-block;
+  float: left;
+
 }
 
 .gameOptionButtons{
@@ -32,7 +33,7 @@ body{
   background-color: black;
 }
 
-main{
+.gameContainer{
   width: 450px;
   margin: 0 auto;
 }
@@ -49,21 +50,19 @@ div[name="allTheBlocks"]{
   border-radius: 20px
 }
 
-div:nth-child(1) {
-    border: 3px dashed white;
-}
 
 
 footer{
   clear:both;
   text-align: center;
-  padding: 20px
+  padding: 15px;
+  margin-bottom: 50px;
 
 }
 
 input, button, submit {
-  border:none;
   font-family: 'Press Start 2P', cursive;
+  border:none;
 }
 
 .red, #red::before, #red::after {
@@ -150,64 +149,3 @@ input, button, submit {
   margin: 0 0 0 -14px;
   outline: 4px solid white;
 }
-/*.buttonReset{
-	-webkit-transition: all 0.5s;
-	-moz-transition: all 0.5s;
-	-o-transition: all 0.5s;
-	transition: all 0.5s;
-	border: 1px solid rgba(255,255,255,0.5);
-	position: relative;
-}
-
-.buttonReset::before{
-	content: '';
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	z-index: 1;
-	opacity: 0;
-	background-color: rgba(255,255,255,0.5);
-	-webkit-transition: all 0.4s;
-	-moz-transition: all 0.4s;
-	-o-transition: all 0.4s;
-	transition: all 0.4s;
-	-webkit-transform: scale(1, 0.5);
-	transform: scale(1, 0.5);
-}
-.buttonReset:hover::before{
-	opacity: 1;
-	-webkit-transform: scale(1, 1);
-	transform: scale(1, 1);
-}
-.buttonTest, .music{
-	-webkit-transition: all 0.5s;
-	-moz-transition: all 0.5s;
-	-o-transition: all 0.5s;
-	transition: all 0.5s;
-	border: 1px solid rgba(255,255,255,0.5);
-	position: relative;
-}
-
-.buttonTest::before{
-	content: '';
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	opacity: 0;
-	background-color: rgba(255,255,255,0.5);
-	-webkit-transition: all 0.4s;
-	-moz-transition: all 0.4s;
-	-o-transition: all 0.4s;
-	transition: all 0.4s;
-	-webkit-transform: scale(1, 0.5);
-	transform: scale(1, 0.5);
-}
-.buttonTest:hover::before{
-	opacity: 1;
-	-webkit-transform: scale(1, 1);
-	transform: scale(1, 1);
-}*/
