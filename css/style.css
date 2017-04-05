@@ -1,8 +1,9 @@
-.buttonReset, .buttonTest{
+.buttonReset, .buttonTest, .music{
     width: 100px;
     height: 40px;
     color: white;
-    background: none
+    background: none;
+    font-family: 'Press Start 2P', cursive;
 }
 
 
@@ -45,11 +46,13 @@ div[name="allTheBlocks"]{
   inset 2.5px 1px 1px rgba(255,255,255,1);
   box-sizing: border-box;
   border: 1px solid black;
+  border-radius: 20px
 }
 
 div:nth-child(1) {
-    border: 4px dashed white;
+    border: 3px dashed white;
 }
+
 
 footer{
   clear:both;
@@ -60,6 +63,7 @@ footer{
 
 input, button, submit {
   border:none;
+  font-family: 'Press Start 2P', cursive;
 }
 
 .red, #red::before, #red::after {
@@ -146,7 +150,7 @@ input, button, submit {
   margin: 0 0 0 -14px;
   outline: 4px solid white;
 }
-.buttonReset{
+/*.buttonReset{
 	-webkit-transition: all 0.5s;
 	-moz-transition: all 0.5s;
 	-o-transition: all 0.5s;
@@ -177,7 +181,7 @@ input, button, submit {
 	-webkit-transform: scale(1, 1);
 	transform: scale(1, 1);
 }
-.buttonTest{
+.buttonTest, .music{
 	-webkit-transition: all 0.5s;
 	-moz-transition: all 0.5s;
 	-o-transition: all 0.5s;
@@ -206,4 +210,4 @@ input, button, submit {
 	opacity: 1;
 	-webkit-transform: scale(1, 1);
 	transform: scale(1, 1);
-}
+}*/

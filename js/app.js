@@ -1,21 +1,21 @@
 $(function gameSetup() {
   const $blocks     = [];
   const width       = 15;
+  const blockValues = ['red','orange','yellow','green','blue','purple'];
   let   newColor;
   let   $firstBlock;
   let   originalColorOfFirstTile;
 
   addBlocks();
+  initAudio();
+  blockSound();
 
+  $('#ai').on('click', autoClick);
   $('#reset').on('click', resetBlocks);
   $('.buttonColor').on('click', changeBlocks);
-  $('#test').on('click', autoClick);
 
   // add blocks to page
-  function makeBlocks() {
-    const blockValues = ['red','orange','yellow','green','blue','purple'];
-    return blockValues[Math.floor(Math.random() * blockValues.length)];
-  }
+  function makeBlocks() {return blockValues[Math.floor(Math.random() * blockValues.length)];}
   // Add blocks to page
   function addBlocks(){
     for (let i = 0; i < 225; i++) {
@@ -30,16 +30,16 @@ $(function gameSetup() {
     $('div[name="allTheBlocks"]').remove();
     gameSetup();
   }
-
+  // Change first block to color button clicked
   function changeBlocks(e) {
     newColor                 = e.target.id;
     originalColorOfFirstTile = $firstBlock.attr('class');
+    $('h1').css('color', newColor);
     recursiveBlockCheck(0);
   }
-
-  // Faux-that randomly assigns adjacent cells a new color
+  // Faux-ai that randomly assigns adjacent cells a new color
   function autoClick() {
-    const $buttons = $($('.buttonColor').sort(function() {
+    const $buttons = $($('.buttonColor').sort(() => {
       return 0.9 - Math.random();
     }));
 
@@ -87,9 +87,7 @@ $(function gameSetup() {
     return aboveTop(newIndex) || belowBottom(newIndex) || pastSides(newIndex, currentIndex);
   }
 
-  function aboveTop(index) {
-    return index < 0;
-  }
+  function aboveTop(index) {return index < 0;}
 
   function belowBottom(index) {
     return index > (width * width)-1;
@@ -99,27 +97,20 @@ $(function gameSetup() {
     return (newIndex % width) - (currentIndex % width) === 14;
   }
 
+  function initAudio(){
+    const audio = $('<audio>', {src: './music/Blox.mp3' });
+    $('.music').on('click', function() {
+      audio[0].paused ? audio[0].play() : audio[0].pause();
+    });
+  }
 
-  const audioElement = document.createElement('audio');
-  audioElement.setAttribute('src', './music/Blox.mp3');
-
-  $('#music').on( 'click', function() {
-    audioElement.paused ? audioElement.play() : audioElement.pause();
-    console.log(this);
-
-  });
-
-
-
-
-
-
-
-
-
-
-
-
+  function blockSound(){
+    const audio = $('<audio>', {src: './music/move.mp3' });
+    console.log(audio);
+    $('.buttonColor').on('click', function() {
+      audio[0].play();
+    });
+  }
 
 
 });
