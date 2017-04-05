@@ -1,4 +1,4 @@
-$(function() {
+$(function gameSetup() {
   const $blocks     = [];
   const width       = 15;
   let   newColor;
@@ -11,7 +11,33 @@ $(function() {
   $('.buttonColor').on('click', changeBlocks);
   $('#test').on('click', autoClick);
 
-  // Magic computer
+  // add blocks to page
+  function makeBlocks() {
+    const blockValues = ['red','orange','yellow','green','blue','purple'];
+    return blockValues[Math.floor(Math.random() * blockValues.length)];
+  }
+  // Add blocks to page
+  function addBlocks(){
+    for (let i = 0; i < 225; i++) {
+      const block = $('<div>', { id: [i], 'class': makeBlocks(), name: 'allTheBlocks'});
+      $blocks.push(block);
+      $('main').append(block);
+      $firstBlock = $blocks[0];
+    }
+  }
+  // Reset game
+  function resetBlocks(){
+    $('div[name="allTheBlocks"]').remove();
+    gameSetup();
+  }
+
+  function changeBlocks(e) {
+    newColor                 = e.target.id;
+    originalColorOfFirstTile = $firstBlock.attr('class');
+    recursiveBlockCheck(0);
+  }
+
+  // Faux-that randomly assigns adjacent cells a new color
   function autoClick() {
     const $buttons = $($('.buttonColor').sort(function() {
       return 0.9 - Math.random();
@@ -30,47 +56,18 @@ $(function() {
     }, 500*$buttons.size());
   }
 
-  function makeBlocks() {
-    // assign block values
-    const blockValues = ['red','orange','yellow','green','blue','purple'];
-    return blockValues[Math.floor(Math.random() * blockValues.length)];
-  }
-  // add blocks to page
-  function addBlocks(){
-    for (let i = 0; i < 225; i++) {
-      const block = $('<div>', { id: [i], 'class': makeBlocks(), name: 'allTheBlocks'});
-      $blocks.push(block);
-      $('main').append(block);
-      $firstBlock = $blocks[0];
-    }
-  }
-
-  function resetBlocks(){
-    $('div[name="allTheBlocks"]').remove();
-    makeBlocks();
-    addBlocks();
-  }
-
-
-  function changeBlocks(e) {
-    newColor                 = e.target.id;
-    originalColorOfFirstTile = $firstBlock.attr('class');
-    recursiveBlockCheck(0);
-  }
-
-
   function recursiveBlockCheck(index) {
     // Select the block in the dom
     const $newBlock    = $blocks[index];
     // Get it's current Color
     const currentColor = $newBlock.attr('class');
-    // Temp change the border-color to see recursion in action...
+    // Temporarily change the border-color for player to see spread
     $newBlock.css('border-color', 'white');
     setTimeout(() => {
       $newBlock.css('border-color', 'black');
     }, 250);
-    // If it's not the same color as the first block,
-    // Stop recursion and exit with return
+
+    // Stop if it's not the same color as the first block,
     if (originalColorOfFirstTile !== currentColor) return;
     // Change the block to be the new color
     $newBlock.attr('class', newColor);
@@ -82,9 +79,6 @@ $(function() {
       const newIndex  = index + directions[i];
       // Check that it's a valid move
       if (invalidMove(newIndex, index)) continue;
-      // console.log('checking', newIndex)
-
-      // // Use that block as the new starting block
       recursiveBlockCheck(newIndex);
     }
   }
@@ -104,18 +98,28 @@ $(function() {
   function pastSides(newIndex, currentIndex) {
     return (newIndex % width) - (currentIndex % width) === 14;
   }
+
+
+  const audioElement = document.createElement('audio');
+  audioElement.setAttribute('src', './music/Blox.mp3');
+
+  $('#music').on( 'click', function() {
+    audioElement.paused ? audioElement.play() : audioElement.pause();
+    console.log(this);
+
+  });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 });
-
-
-/*
-was in line 59 between invalidMove(newIndex)
-// // e.g. above the top
-// (newIndex < 0) ||
-// // e.g. below the bottom
-// (newIndex > (width * width)) ||
-// // (1 % 15) - (0 % 15) -> VALID
-// // (14 % 15) - (15 % 15) -> NOT VALID
-// // e.g. checking end of row to the right
-// // e.g. end of row to the left
-// (newIndex % width - index % width) === 14
-*/
