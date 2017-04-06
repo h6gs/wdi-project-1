@@ -1,77 +1,39 @@
-html{
+html {
   border: 5px dotted white;
-  margin: 10px;
-
+  margin: 20px;
 }
-
-.gameContainer{
-  min-width: 600px;
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-.buttonReset, .buttonTest, .music{
-    width: 100px;
-    height: 40px;
-    color: white;
-    background: none;
-    font-family: 'Press Start 2P', cursive;
-    cursor: pointer; cursor: hand;
-}
-
-
-.gameInstructions{
-  margin-left: 50px;
-  line-height: 50px;
-  float: left;
-}
-
-.gameOptionButtons{
-  text-align: center;
-  margin: 10px;
-}
-
-
-h1{
+h1 {
   text-align: center;
 }
-h2{
+h2 {
   text-decoration: underline;
 }
-
-body{
+body {
   font-family: 'Press Start 2P', cursive;
   color: white;
   background-color: black;
 }
-
-
-div[name="allTheBlocks"]{
-  height: 30px;
-  width: 30px;
-  float: left;
-  line-height: 50px;
-  box-shadow: inset 0 -4px 2px 0.5px rgba(0,0,0,0.7),
-  inset 2.5px 1px 1px rgba(255,255,255,1);
-  box-sizing: border-box;
-  border: 1px solid black;
-  border-radius: 20px
-}
-
-
-
-footer{
+footer {
   clear:both;
   text-align: center;
-  padding: 15px;
+  padding: 20px;
   margin-bottom: 50px;
 }
-
 input, button, submit {
   font-family: 'Press Start 2P', cursive;
   border:none;
 }
-
+.gameContainer > div {
+  height: 30px;
+  width: 30px;
+  float: left;
+  line-height: 50px;
+  box-shadow: inset 0 -4px 3px 2px rgba(0,0,0,0.8),
+  inset 3px 1px 1px rgba(255,255,255,1);
+  box-sizing: border-box;
+  border: 1px solid black;
+  border-radius: 20px
+}
 .red, #red::before, #red::after {
   background-color: #FF4136;
 }
@@ -90,7 +52,7 @@ input, button, submit {
 .purple, #purple::before, #purple::after {
   background-color: #FF00E6;
 }
-.buttonColor{
+.buttonColor {
   -webkit-transition: all 0.5s;
   -moz-transition: all 0.5s;
   -o-transition: all 0.5s;
@@ -102,8 +64,7 @@ input, button, submit {
   background: none;
   cursor: pointer; cursor: hand;
 }
-
-.buttonColor::before{
+.buttonColor::before {
   content: '';
   position: absolute;
   top: 0;
@@ -118,8 +79,7 @@ input, button, submit {
   outline: 4px solid black ;
   outline-offset: -7px;
 }
-
-.buttonColor::after{
+.buttonColor::after {
   content: '';
   position: absolute;
   top: 0;
@@ -134,7 +94,7 @@ input, button, submit {
   outline: 4px solid black;
   outline-offset: -7px;
 }
-.buttonColor:hover::before{
+.buttonColor:hover::before {
   -webkit-transform: rotate(-225deg);
   -moz-transform: rotate(-225deg);
   -ms-transform: rotate(-225deg);
@@ -145,8 +105,7 @@ input, button, submit {
   margin: 0 0 0 -14px;
   outline: 4px solid white;
 }
-
-.buttonColor:hover::after{
+.buttonColor:hover::after {
   -webkit-transform: rotate(225deg);
   -moz-transform: rotate(225deg);
   -ms-transform: rotate(225deg);
@@ -156,4 +115,33 @@ input, button, submit {
   width: 60px;
   margin: 0 0 0 -14px;
   outline: 4px solid white;
+}
+.gameContainer {
+  min-width: 600px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+.buttonReset, .buttonTest, .music{
+    width: 100px;
+    height: 40px;
+    color: white;
+    background: none;
+    font-family: 'Press Start 2P', cursive;
+    cursor: pointer; cursor: hand;
+}
+.gameInstructions {
+  margin-left: 50px;
+  line-height: 50px;
+  float: left;
+}
+.gameOptionButtons {
+  text-align: center;
+  margin: 10px;
+}
+.fallingBlocks {
+    position:fixed;
+    z-index:-2;
+    width:30px;
+    height:30px;
+    border-radius: 30px
 }

@@ -18,14 +18,14 @@ $(function initGame() {
   $('#reset').on('click', resetBlocks);
   $('.buttonColor').on('click', changeBlocks);
 
-  // make blocks
+  // Make blocks
   function makeBlocks() {
     return blockValues[Math.floor(Math.random() * blockValues.length)];
   }
   // Add blocks to page
   function addBlocks(){
     for (let i = 0; i < blockCount; i++) {
-      const block = $('<div>', { id: [i], 'class': makeBlocks(), name: 'allTheBlocks'});
+      const block = $('<div>', { id: [i], 'class': makeBlocks()});
       $blocks.push(block);
       $('.gameContainer').append(block);
       $firstBlock = $blocks[0];
@@ -34,7 +34,7 @@ $(function initGame() {
   // Reset game
   function resetBlocks(){
     $('div[name="allTheBlocks"]').remove();
-    $('.audio').remove(); 
+    $('.audio').remove();
     initGame();
   }
   // Change first block to color button clicked
@@ -43,8 +43,15 @@ $(function initGame() {
     originalColorOfFirstTile = $firstBlock.attr('class');
     $('h1, h2').css('color', newColor);
     recursiveBlockCheck(0);
+
+    const setT = setInterval(function(){
+      fallingBlocks();
+    }, 0);
+    setTimeout(function(){
+      clearInterval(setT);
+    },3000);
   }
-  // recursive function to check and color blocks
+  // Recursive function to check and color blocks
   function recursiveBlockCheck(index) {
     // Select the block in the dom
     const $newBlock    = $blocks[index];
@@ -53,7 +60,7 @@ $(function initGame() {
     // Temporarily change the border-color for player to see check
     $newBlock.css('border-color', 'white');
     setTimeout(() => {
-      $newBlock.css('border-color', 'black');
+      $newBlock.css('border-color', 'grey');
     }, 250);
     // Stop if it's not the same color as the first block,
     if (originalColorOfFirstTile !== currentColor) return;
@@ -68,7 +75,7 @@ $(function initGame() {
       recursiveBlockCheck(newIndex);
     }
   }
-  //check whether the move/adjacent block is valid(or not)
+  // Check whether the move/adjacent block is valid(or not)
   function invalidMove(newIndex, currentIndex) {
     return aboveTop(newIndex) || belowBottom(newIndex) || pastSides(newIndex, currentIndex);
   }
@@ -81,7 +88,7 @@ $(function initGame() {
   function pastSides(newIndex, currentIndex) {
     return (newIndex % width) - (currentIndex % width) === width-1;
   }
-  //play theme song
+  // Play theme song
   function initAudio(){
     $('.music').text('Music').on('click', function() {
       console.log(audioTheme);
@@ -89,14 +96,14 @@ $(function initGame() {
       audioTheme[0].paused ? audioTheme[0].play() : audioTheme[0].pause();
     });
   }
-  //play move audio
+  // Play move audio
   function blockSound(){
     $('.buttonColor').on('click', function() {
       audioBlock[0].play();
     });
   }
 
-  // Chaos mode
+  // Chaos mode - computer
   function autoClick() {
     const $buttons = $($('.buttonColor').sort(function() {
       return 0.5 - Math.random();
@@ -114,6 +121,21 @@ $(function initGame() {
       }
     }, 500*$buttons.size());
   }
-
+  // Falling animation
+  function fallingBlocks() {
+    const fallingBlock = $('<div class="fallingBlocks">');
+    $('body').prepend(fallingBlock);
+    $('.fallingBlocks').css('background', newColor);
+    const blockAnimCount = Math.floor(Math.random() * $('body').width()*20);
+    const blockSpeed = Math.floor(Math.random() + 1000);
+    fallingBlock.css({'left': blockAnimCount+'px'});
+    fallingBlock.animate({
+      width: [ 'toggle', 'swing' ],
+      top: '800px',
+      opacity: '0'
+    }, blockSpeed, function(){
+      $(this).remove();
+    });
+  }
 
 });
