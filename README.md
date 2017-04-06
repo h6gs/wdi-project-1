@@ -1,27 +1,49 @@
 # wdi-project-1
 ![](./images/ballMania.png)
 
-My first project at WDI London
+**Introduction**
 
-Introduction
+Ball-Mania is based from the sort-of popular single player web game 'Drench'. This was made for my first project on the Web Development course at General Assembly using JavaScript(JQuery) / CSS & HTML. 
 
-Ball-Mania is
+A hosted version of my game can be found [here] (fierce-temple-20446.herokuapp.com) on Heroku.
 
-How to play
 
-Upon loading the site the player will be presented with a completed picture. When the player is ready to start they must click on the button below the picture labeled "Shufflez". Once this is clicked the picture will be divided up into eight equally sized square tiles and one blank space which will be displayed in a three by three grid format.
+**How to play**
 
-The aim of the game is to rearrange the tiles to create the completed picture. This is achieved by clicking on the tile which you want to move. Picture tiles can only be moved into a blank space. can only move one space at a time can be moved either left, right, up or down.
+The player starts in the top-left corner of the grid and has to use the buttons on the bottom to join the adjacent colors & ultimately fill the screen. 
 
-Project Brief
+**Project Brief**
 
-Create a game utilising our 2 weeks of knowledge on HTML, CSS and JavaScript.
-Create a two player game or a computer opponent to beat.
-Built the game using object orientated programming if possible.
-How it was built
+* Make a game
 
-Salvy McMeme Face was built with HTML/CSS and Javascript, it also utilised the following:
+* Object-Orientate the code
 
-[jQuery library] (https://developers.google.com/speed/libraries/)
-[Fonts] (https://fonts.google.com/)
-Credits
+* Multiplayer (where possible)
+
+**How it was built**
+
+HTML, CSS and JavaScript with the aid of Jquery. 
+
+Some snippets below:
+
+
+    const block = $('<div>', { id: [i], 'class': game.makeBlocks()});
+ .
+         
+    if (game.invalidMove(newIndex, index)) continue;
+        recursiveBlockCheck(newIndex);
+      
+         
+.
+      
+    game.pastSides = function pastSides(newIndex, currentIndex) {
+      return (newIndex % game.width) - (currentIndex % game.width) === game.width-1;
+
+      
+
+
+**Credits**
+
+My General Assembly instructors
+
+Jake Weary

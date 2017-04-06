@@ -29,7 +29,7 @@ $(() => {
   // Add blocks to page
   game.addBlocks  = function addBlocks(){
     for (let i    = 0; i < game.blockCount; i++) {
-      const block = $('<div>', { id: [i], 'class': game.makeBlocks()});
+      const block = $('<div>', { id: [i], 'class': game.makeBlocks(),name: 'allTheBlocks'});
       game.$blocks.push(block);
       $('.gameContainer').append(block);
       game.$firstBlock = game.$blocks[0];
@@ -38,7 +38,8 @@ $(() => {
     game.resetBlocks = function resetBlocks(){
       $('div[name="allTheBlocks"]').remove();
       $('.audio').remove();
-      game.initGame;
+      game.initGame();
+
     };
     // Change first block to color button clicked
     game.changeBlocks = function changeBlocks(e) {
