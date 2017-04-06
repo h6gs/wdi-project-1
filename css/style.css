@@ -1,8 +1,8 @@
 html{
-  border: 10px dotted white;
-  margin: 20px;
-}
+  border: 5px dotted white;
+  margin: 10px;
 
+}
 
 .gameContainer{
   min-width: 600px;
