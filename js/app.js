@@ -110,13 +110,13 @@ $(() => {
       const $buttons = $($('.buttonColor').sort(function() {
         return 0.5 - Math.random();
       }));
-
+      // Change blocks randomly
       $.each($buttons, function() {
         setTimeout(() => {
           $(this).trigger('click', game.changeBlocks);
         }, 500);
       });
-
+      // Interval to Change blocks randomly
       setTimeout(() => {
         if ($('div').size() !== $(`div.${$('div').attr('class')}`).size()) {
           autoClick();
@@ -132,7 +132,7 @@ $(() => {
       const blockSpeed = Math.floor(Math.random() + 1000);
       fallingBlock.css({'left': blockAnimCount+'px'});
       fallingBlock.animate({
-        width: [ 'toggle', 'swing' ],
+        width: ['toggle', 'swing'],
         top: '800px',
         opacity: '0'
       }, blockSpeed, function(){
