@@ -1,14 +1,16 @@
 $(function gameSetup() {
   const $blocks     = [];
-  const width       = 15;
+  const width       = 20;
   const blockValues = ['red','orange','yellow','green','blue','purple'];
+  const audioTheme = $('<audio>', {src: './music/Blox.mp3' });
+  const audioBlock = $('<audio>', {src: './music/move.mp3' });
   let   newColor;
   let   $firstBlock;
   let   originalColorOfFirstTile;
 
   addBlocks();
-  initAudio();
   blockSound();
+  initAudio();
 
   $('#ai').on('click', autoClick);
   $('#reset').on('click', resetBlocks);
@@ -18,7 +20,7 @@ $(function gameSetup() {
   function makeBlocks() {return blockValues[Math.floor(Math.random() * blockValues.length)];}
   // Add blocks to page
   function addBlocks(){
-    for (let i = 0; i < 225; i++) {
+    for (let i = 0; i < 400; i++) {
       const block = $('<div>', { id: [i], 'class': makeBlocks(), name: 'allTheBlocks'});
       $blocks.push(block);
       $('.gameContainer').append(block);
@@ -34,27 +36,26 @@ $(function gameSetup() {
   function changeBlocks(e) {
     newColor                 = e.target.id;
     originalColorOfFirstTile = $firstBlock.attr('class');
-    $('h1').css('color', newColor);
+    $('h1, h2').css('color', newColor);
     recursiveBlockCheck(0);
   }
-  // Faux-ai that randomly assigns adjacent cells a new color
+  // Magic computer
   function autoClick() {
-    const $buttons = $($('.buttonColor').sort(() => {
-      return 0.9 - Math.random();
+    const $buttons = $($('.buttonColor').sort(function() {
+      return 0.5 - Math.random();
     }));
 
     $.each($buttons, function() {
       setTimeout(() => {
-        $(this).trigger('click', changeBlocks[10]);
+        $(this).trigger('click', changeBlocks);
       }, 500);
     });
 
-    //interval for autoClick
-    // setTimeout(() => {
-    //   if ($('div').size() !== $(`div.${$('div').attr('class')}`).size()) {
-    //     autoClick();
-    //   }
-    // }, 500*$buttons.size());
+    setTimeout(() => {
+      if ($('div').size() !== $(`div.${$('div').attr('class')}`).size()) {
+        autoClick();
+      }
+    }, 500*$buttons.size());
   }
 
   function recursiveBlockCheck(index) {
@@ -94,19 +95,17 @@ $(function gameSetup() {
     return index > (width * width)-1;
   }
   function pastSides(newIndex, currentIndex) {
-    return (newIndex % width) - (currentIndex % width) === 14;
+    return (newIndex % width) - (currentIndex % width) === width-1;
   }
   function initAudio(){
-    const audio = $('<audio>', {src: './music/Blox.mp3' });
     $('.music').text('Music').on('click', function() {
-      audio[0].paused ? $('.music').text('Pause') : $('.music').text('Music');
-      audio[0].paused ? audio[0].play() : audio[0].pause();
+      audioTheme[0].paused ? $('.music').text('Pause') : $('.music').text('Music');
+      audioTheme[0].paused ? audioTheme[0].play() : audioTheme[0].pause();
     });
   }
   function blockSound(){
-    const audio = $('<audio>', {src: './music/move.mp3' });
     $('.buttonColor').on('click', function() {
-      audio[0].play();
+      audioBlock[0].play();
     });
   }
 
