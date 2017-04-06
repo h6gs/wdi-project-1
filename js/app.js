@@ -1,141 +1,144 @@
-$(function initGame() {
-  const $blocks     = [];
-  const width       = 20;
-  const blockCount  = 400;
-  const directions  = [-width,1,width,-1];
-  const blockValues = ['red','orange','yellow','green','blue','purple'];
-  const audioTheme  = $('<audio>', {src: './music/Blox.mp3' });
-  const audioBlock  = $('<audio>', {src: './music/move.mp3' });
-  let   newColor;
-  let   $firstBlock;
-  let   originalColorOfFirstTile;
+$(() => {
+  var game = game || {};
 
-  addBlocks();
-  blockSound();
-  initAudio();
+  game.initGame = function initGame(){
+    game.newColor;
+    game.$firstBlock;
+    game.originalColorOfFirstTile;
+    game.$blocks     = [];
+    game.width       = 20;
+    game.blockCount  = 400;
+    game.directions  = [-game.width,1,game.width,-1];
+    game.blockValues = ['red','orange','yellow','green','blue','purple'];
+    game.audioTheme  = $('<audio>', {src: './music/Blox.mp3' });
+    game.audioBlock  = $('<audio>', {src: './music/move.mp3' });
 
-  $('#ai').on('click', autoClick);
-  $('#reset').on('click', resetBlocks);
-  $('.buttonColor').on('click', changeBlocks);
+    game.makeBlocks();
+    game.addBlocks();
+    game.blockSound();
+    game.initAudio();
 
+    $('#ai').on('click', game.autoClick);
+    $('#reset').on('click', game.resetBlocks);
+    $('.buttonColor').on('click', game.changeBlocks);
+  };
   // Make blocks
-  function makeBlocks() {
-    return blockValues[Math.floor(Math.random() * blockValues.length)];
-  }
+  game.makeBlocks = function makeBlocks(){
+    return game.blockValues[Math.floor(Math.random() * game.blockValues.length)];
+  };
   // Add blocks to page
-  function addBlocks(){
-    for (let i = 0; i < blockCount; i++) {
-      const block = $('<div>', { id: [i], 'class': makeBlocks()});
-      $blocks.push(block);
+  game.addBlocks  = function addBlocks(){
+    for (let i    = 0; i < game.blockCount; i++) {
+      const block = $('<div>', { id: [i], 'class': game.makeBlocks()});
+      game.$blocks.push(block);
       $('.gameContainer').append(block);
-      $firstBlock = $blocks[0];
+      game.$firstBlock = game.$blocks[0];
     }
-  }
-  // Reset game
-  function resetBlocks(){
-    $('div[name="allTheBlocks"]').remove();
-    $('.audio').remove();
-    initGame();
-  }
-  // Change first block to color button clicked
-  function changeBlocks(e) {
-    newColor                 = e.target.id;
-    originalColorOfFirstTile = $firstBlock.attr('class');
-    $('h1, h2').css('color', newColor);
-    recursiveBlockCheck(0);
+    // Reset game
+    game.resetBlocks = function resetBlocks(){
+      $('div[name="allTheBlocks"]').remove();
+      $('.audio').remove();
+      game.initGame;
+    };
+    // Change first block to color button clicked
+    game.changeBlocks = function changeBlocks(e) {
+      game.newColor            = e.target.id;
+      game.originalColorOfFirstTile = game.$firstBlock.attr('class');
+      $('h1, h2').css('color', game.newColor);
+      game.recursiveBlockCheck(0);
 
-    const setT = setInterval(function(){
-      fallingBlocks();
-    }, 0);
-    setTimeout(function(){
-      clearInterval(setT);
-    },3000);
-  }
-  // Recursive function to check and color blocks
-  function recursiveBlockCheck(index) {
-    // Select the block in the dom
-    const $newBlock    = $blocks[index];
-    // Get it's current Color
-    const currentColor = $newBlock.attr('class');
-    // Temporarily change the border-color for player to see check
-    $newBlock.css('border-color', 'white');
-    setTimeout(() => {
-      $newBlock.css('border-color', 'grey');
-    }, 250);
-    // Stop if it's not the same color as the first block,
-    if (originalColorOfFirstTile !== currentColor) return;
-    // Change the block to be the new color
-    $newBlock.attr('class', newColor);
-    // Loop through the directions
-    for (let i = 0; i < directions.length; i++) {
-      // Use the directions to select a new block using the compass
-      const newIndex  = index + directions[i];
-      // Check that it's a valid move
-      if (invalidMove(newIndex, index)) continue;
-      recursiveBlockCheck(newIndex);
-    }
-  }
-  // Check whether the move/adjacent block is valid(or not)
-  function invalidMove(newIndex, currentIndex) {
-    return aboveTop(newIndex) || belowBottom(newIndex) || pastSides(newIndex, currentIndex);
-  }
-  function aboveTop(index) {
-    return index < 0;
-  }
-  function belowBottom(index) {
-    return index > (width * width)-1;
-  }
-  function pastSides(newIndex, currentIndex) {
-    return (newIndex % width) - (currentIndex % width) === width-1;
-  }
-  // Play theme song
-  function initAudio(){
-    $('.music').text('Music').on('click', function() {
-      console.log(audioTheme);
-      audioTheme[0].paused ? $('.music').text('Pause') : $('.music').text('Music');
-      audioTheme[0].paused ? audioTheme[0].play() : audioTheme[0].pause();
-    });
-  }
-  // Play move audio
-  function blockSound(){
-    $('.buttonColor').on('click', function() {
-      audioBlock[0].play();
-    });
-  }
-
-  // Chaos mode - computer
-  function autoClick() {
-    const $buttons = $($('.buttonColor').sort(function() {
-      return 0.5 - Math.random();
-    }));
-
-    $.each($buttons, function() {
+      const setT = setInterval(function(){
+        game.fallingBlocks();
+      }, 0);
+      setTimeout(function(){
+        clearInterval(setT);
+      },3000);
+    };
+    // Recursive function to check and color blocks
+    game.recursiveBlockCheck = function recursiveBlockCheck(index) {
+      // Select the block in the dom
+      const $newBlock    = game.$blocks[index];
+      // Get it's current Color
+      const currentColor = $newBlock.attr('class');
+      // Temporarily change the border-color for player to see check
+      $newBlock.css('border-color', 'white');
       setTimeout(() => {
-        $(this).trigger('click', changeBlocks);
-      }, 500);
-    });
-
-    setTimeout(() => {
-      if ($('div').size() !== $(`div.${$('div').attr('class')}`).size()) {
-        autoClick();
+        $newBlock.css('border-color', 'grey');
+      }, 250);
+      // Stop if it's not the same color as the first block,
+      if (game.originalColorOfFirstTile !== currentColor) return;
+      // Change the block to be the new color
+      $newBlock.attr('class', game.newColor);
+      // Loop through the directions
+      for (let i = 0; i < game.directions.length; i++) {
+        // Use the directions to select a new block using the compass
+        const newIndex  = index + game.directions[i];
+        // Check that it's a valid move
+        if (game.invalidMove(newIndex, index)) continue;
+        recursiveBlockCheck(newIndex);
       }
-    }, 500*$buttons.size());
-  }
-  // Falling animation
-  function fallingBlocks() {
-    const fallingBlock = $('<div class="fallingBlocks">');
-    $('body').prepend(fallingBlock);
-    $('.fallingBlocks').css('background', newColor);
-    const blockAnimCount = Math.floor(Math.random() * $('body').width()*20);
-    const blockSpeed = Math.floor(Math.random() + 1000);
-    fallingBlock.css({'left': blockAnimCount+'px'});
-    fallingBlock.animate({
-      width: [ 'toggle', 'swing' ],
-      top: '800px',
-      opacity: '0'
-    }, blockSpeed, function(){
-      $(this).remove();
-    });
-  }
+    };
+    // Check whether the move/adjacent block is valid(or not)
+    game.invalidMove = function invalidMove(newIndex, currentIndex) {
+      return game.aboveTop(newIndex) || game.belowBottom(newIndex) || game.pastSides(newIndex, currentIndex);
+    };
+    game.aboveTop = function aboveTop(index) {
+      return index < 0;
+    };
+    game.belowBottom = function belowBottom(index) {
+      return index > (game.width * game.width)-1;
+    };
+    game.pastSides = function pastSides(newIndex, currentIndex) {
+      return (newIndex % game.width) - (currentIndex % game.width) === game.width-1;
+    };
+    // Play theme song
+    game.initAudio = function initAudio(){
+      $('.music').text('Music').on('click', function() {
+        game.audioTheme[0].paused ? $('.music').text('Pause') : $('.music').text('Music');
+        game.audioTheme[0].paused ? game.audioTheme[0].play() : game.audioTheme[0].pause();
+      });
+    };
+    // Play move audio
+    game.blockSound = function blockSound(){
+      $('.buttonColor').on('click', function() {
+        game.audioBlock[0].play();
+      });
+    };
 
+    // Chaos mode - computer
+    game.autoClick = function autoClick() {
+      const $buttons = $($('.buttonColor').sort(function() {
+        return 0.5 - Math.random();
+      }));
+
+      $.each($buttons, function() {
+        setTimeout(() => {
+          $(this).trigger('click', game.changeBlocks);
+        }, 500);
+      });
+
+      setTimeout(() => {
+        if ($('div').size() !== $(`div.${$('div').attr('class')}`).size()) {
+          autoClick();
+        }
+      }, 500*$buttons.size());
+    };
+    // Falling animation
+    game.fallingBlocks = function fallingBlocks() {
+      const fallingBlock = $('<div class="fallingBlocks">');
+      $('body').prepend(fallingBlock);
+      $('.fallingBlocks').css('background', game.newColor);
+      const blockAnimCount = Math.floor(Math.random() * $('body').width()*20);
+      const blockSpeed = Math.floor(Math.random() + 1000);
+      fallingBlock.css({'left': blockAnimCount+'px'});
+      fallingBlock.animate({
+        width: [ 'toggle', 'swing' ],
+        top: '800px',
+        opacity: '0'
+      }, blockSpeed, function(){
+        $(this).remove();
+      });
+    };
+  };
+  $(game.initGame());
 });
