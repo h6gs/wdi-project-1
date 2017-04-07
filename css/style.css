@@ -102,7 +102,7 @@ input, button, submit {
   transform: rotate(-225deg);
   height: 25px;
   width: 60px;
-  margin: 0 0 0 -14px;
+  margin: 0 0 0 -15px;
   outline: 4px solid white;
 }
 .buttonColor:hover::after {
@@ -113,7 +113,7 @@ input, button, submit {
   transform: rotate(225deg);
   height: 25px;
   width: 60px;
-  margin: 0 0 0 -14px;
+  margin: 0 0 0 -15px;
   outline: 4px solid white;
 }
 .gameContainer {
@@ -123,7 +123,7 @@ input, button, submit {
 }
 .buttonReset, .buttonTest, .music{
     width: 100px;
-    height: 40px;
+    height: 50px;
     color: white;
     background: none;
     font-family: 'Press Start 2P', cursive;
