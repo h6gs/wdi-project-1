@@ -10,7 +10,7 @@ A hosted version of my game can be found [here] (fierce-temple-20446.herokuapp.c
 
 **How to play**
 
-The player starts in the top-left corner of the grid and has to use the buttons on the bottom to join the adjacent colors in the grid to ultimately fill the screen in any color. 
+The player starts in the top-left corner of the grid and has to use the buttons on the bottom to merge the colors on the grid and ultimately fill the screen in any one color. 
 
 It's rather theraputic.  
 
@@ -26,7 +26,7 @@ It's rather theraputic.
 
 HTML, CSS and JavaScript with the aid of JQuery. 
 
-Some of my snippets below from the project:
+Some snippets below from my project:
 
 
     const block = $('<div>', { id: [i], 'class': game.makeBlocks()});
