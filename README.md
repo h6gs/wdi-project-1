@@ -5,7 +5,7 @@
 
 Based from the sort-of popular web version 'Drench', Ball-Mania is a signle player game and made for my first project on the Web Development course at General Assembly using JavaScript(JQuery) / CSS & HTML. 
 
-A hosted version of my game can be found [here] (fierce-temple-20446.herokuapp.com) on Heroku ( check it out! ).
+A hosted version of my game can be found [here](fierce-temple-20446.herokuapp.com) on Heroku ( check it out! ).
 
 
 **How to play**

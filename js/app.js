@@ -6,8 +6,8 @@ $(() => {
     game.$firstBlock;
     game.originalColorOfFirstTile;
     game.$blocks     = [];
-    game.width       = 20;
-    game.blockCount  = 400;
+    game.width       = 10;
+    game.blockCount  = 100;
     game.directions  = [-game.width,1,game.width,-1];
     game.blockValues = ['red','orange','yellow','green','blue','purple'];
     game.audioTheme  = $('<audio>', {src: './music/Blox.mp3' });
