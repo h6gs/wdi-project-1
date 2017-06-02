@@ -42,8 +42,8 @@ $(() => {
 
     };
     // Change first block to color button clicked
-    game.changeBlocks = function changeBlocks(e) {
-      game.newColor            = e.target.id;
+    game.changeBlocks             = function changeBlocks(e) {
+      game.newColor               = e.target.id;
       game.originalColorOfFirstTile = game.$firstBlock.attr('class');
       $('h1, h2').css('color', game.newColor);
       game.recursiveBlockCheck(0);
@@ -58,9 +58,9 @@ $(() => {
     // Recursive function to check and color blocks
     game.recursiveBlockCheck = function recursiveBlockCheck(index) {
       // Select the block in the dom
-      const $newBlock    = game.$blocks[index];
+      const $newBlock        = game.$blocks[index];
       // Get it's current Color
-      const currentColor = $newBlock.attr('class');
+      const currentColor     = $newBlock.attr('class');
       // Temporarily change the border-color for player to see check
       $newBlock.css('border-color', 'white');
       setTimeout(() => {
